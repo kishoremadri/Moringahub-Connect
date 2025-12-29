@@ -10,11 +10,13 @@
       --primary: #2d8b57;
       --primary-dark: #1f5f3a;
       --accent: #f3c969;
-      --bg: #f5f7fa;
-      --text: #1f2933;
+      --bg: #f3f4f6;
+      --bg-soft: #edf7f3;
+      --text: #111827;
       --muted: #6b7280;
       --white: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+      --radius-xl: 26px;
     }
 
     * {
@@ -25,9 +27,11 @@
     }
 
     body {
-      background: var(--bg);
+      background: radial-gradient(circle at top left, #e0f2f1 0, #f9fafb 45%, #e5f3eb 100%);
       color: var(--text);
       line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
     }
 
     a {
@@ -35,175 +39,314 @@
       color: inherit;
     }
 
+    /* Falling moringa leaves background */
+    .leaf-layer {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .leaf {
+      position: absolute;
+      top: -10vh;
+      font-size: 1.4rem;
+      opacity: 0.65;
+      animation-name: fall, sway;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.8; }
+      100% { transform: translate3d(0, 110vh, 0) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes sway {
+      0%   { margin-left: 0; }
+      50%  { margin-left: 25px; }
+      100% { margin-left: -5px; }
+    }
+
+    header,
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
     header {
-      background: var(--white);
-      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(to right, rgba(243, 244, 246, 0.92), rgba(236, 253, 245, 0.96));
+      border-bottom: 1px solid rgba(209, 213, 219, 0.9);
     }
 
     .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.75rem 1.25rem;
+      max-width: 1120px;
+      margin: auto;
+      padding: 0.6rem 1.4rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
 
     .logo {
       display: flex;
+      gap: 0.7rem;
       align-items: center;
-      gap: 0.6rem;
       font-weight: 700;
       font-size: 1.1rem;
       color: var(--primary-dark);
     }
 
     .logo-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #e3ffe7, #2d8b57);
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 25% 15%, #ffffff, #22c55e, #166534);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--white);
-      font-size: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      color: #f9fafb;
+      font-size: 1.15rem;
+      box-shadow: 0 10px 25px rgba(21, 128, 61, 0.45);
+    }
+
+    .logo-text-main {
+      letter-spacing: 0.04em;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
     }
 
     .nav-links {
       display: flex;
-      gap: 1.25rem;
-      font-size: 0.95rem;
+      gap: 1.3rem;
+      font-size: 0.9rem;
+      align-items: center;
     }
 
     .nav-links a {
       color: var(--muted);
       font-weight: 500;
+      position: relative;
+      padding-bottom: 0.1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #22c55e, #15803d);
+      border-radius: 999px;
+      transition: width 0.18s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .nav-links a:hover {
       color: var(--primary-dark);
     }
 
+    .hero-wrapper {
+      max-width: 1120px;
+      margin: 1.6rem auto 2.4rem;
+      padding: 0 1.4rem;
+    }
+
     .hero {
-      max-width: 1100px;
-      margin: 1.5rem auto 2rem;
-      padding: 1.5rem 1.25rem 2rem;
       display: grid;
-      grid-template-columns: minmax(0,2fr) minmax(0,1.5fr);
-      gap: 2.5rem;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 2.3rem;
       align-items: center;
+      background: radial-gradient(circle at 0 0, #ecfdf5, #ffffff 55%, #e0f2fe);
+      border-radius: var(--radius-xl);
+      padding: 1.7rem 1.6rem 1.9rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.2);
     }
 
     .hero-main {
-      padding-right: 0.5rem;
+      padding-right: 0.75rem;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.75rem;
+      gap: 0.55rem;
+      padding: 0.28rem 0.85rem;
       border-radius: 999px;
-      background: #e6f4ec;
-      color: var(--primary-dark);
+      background: rgba(34, 197, 94, 0.08);
+      color: #166534;
       font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+      border: 1px solid rgba(22, 163, 74, 0.2);
     }
 
     .pill-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--primary);
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .pill-tag {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.06);
+      color: #111827;
     }
 
     h1 {
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      margin-bottom: 0.75rem;
-      color: var(--primary-dark);
+      font-size: clamp(2.1rem, 3.1vw, 2.7rem);
+      margin-bottom: 0.7rem;
+      color: #052e16;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #16a34a, #166534);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .hero-subtitle {
       font-size: 0.98rem;
       color: var(--muted);
-      max-width: 32rem;
-      margin-bottom: 1.25rem;
+      max-width: 34rem;
+      margin-bottom: 1.35rem;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      gap: 0.8rem;
+      margin-bottom: 1.4rem;
     }
 
     .btn {
-      padding: 0.7rem 1.4rem;
+      padding: 0.72rem 1.5rem;
       border-radius: 999px;
-      border: none;
+      border: 1px solid transparent;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+      transition: 0.14s ease all;
+      background: transparent;
+      white-space: nowrap;
     }
 
     .btn-primary {
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: 0 10px 20px rgba(45,139,87,0.35);
+      background: radial-gradient(circle at 0 0, #4ade80, #15803d);
+      color: #ecfdf3;
+      border-color: rgba(21, 128, 61, 0.9);
+      box-shadow: 0 15px 35px rgba(22, 101, 52, 0.4);
     }
 
     .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(45,139,87,0.4);
+      background: radial-gradient(circle at 0 0, #bbf7d0, #166534);
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(21, 128, 61, 0.55);
     }
 
     .btn-outline {
-      background: transparent;
-      border: 1px solid #c4cdd5;
-      color: var(--primary-dark);
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(148, 163, 184, 0.75);
+      color: #065f46;
     }
 
     .btn-outline:hover {
-      background: #eef3f7;
+      background: rgba(226, 232, 240, 0.9);
       transform: translateY(-1px);
+      border-color: rgba(55, 65, 81, 0.9);
+    }
+
+    .btn-tab-active {
+      background: rgba(220, 252, 231, 0.95);
+      border-color: #16a34a;
+      color: #065f46;
+      box-shadow: 0 8px 22px rgba(22, 101, 52, 0.28);
+    }
+
+    .btn-small {
+      padding: 0.45rem 0.9rem;
+      font-size: 0.78rem;
+      border-radius: 999px;
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.25rem;
+      gap: 1.2rem;
       font-size: 0.8rem;
       color: var(--muted);
     }
 
     .hero-meta strong {
-      color: var(--primary-dark);
+      color: #064e3b;
     }
 
     .hero-card {
-      background: radial-gradient(circle at top left, #e7f8ef, #ffffff);
-      border-radius: 24px;
-      padding: 1.4rem 1.25rem;
-      box-shadow: var(--shadow);
-      border: 1px solid #e0e7ec;
+      background: radial-gradient(circle at top left, #ecfdf5, #ffffff 52%, #e0f2fe);
+      border-radius: var(--radius-xl);
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(circle at top, rgba(74, 222, 128, 0.22), transparent 55%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-card-title {
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 0.5rem;
+      color: #052e16;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-chip {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      color: #0f766e;
+      border: 1px solid rgba(13, 148, 136, 0.35);
     }
 
     .hero-card-sub {
@@ -232,23 +375,23 @@
     .tag-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
+      gap: 0.45rem;
+      margin-top: 0.6rem;
     }
 
     .tag {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      background: #f3f4ff;
-      color: #4b5563;
-      border: 1px dashed #d4d4ff;
+      background: rgba(15, 23, 42, 0.03);
+      color: #111827;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
     }
 
     .section {
-      max-width: 1100px;
-      margin: 0 auto 2.25rem;
-      padding: 0 1.25rem;
+      max-width: 1120px;
+      margin: 0 auto 2.3rem;
+      padding: 0 1.4rem;
     }
 
     .section-header {
@@ -257,13 +400,13 @@
       align-items: baseline;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.3rem;
     }
 
     .section-title {
-      font-size: 1.25rem;
+      font-size: 1.28rem;
       font-weight: 700;
-      color: var(--primary-dark);
+      color: #064e3b;
     }
 
     .section-subtitle {
@@ -271,47 +414,56 @@
       color: var(--muted);
     }
 
+    .section-badge {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #0f172a;
+    }
+
     .grid-2 {
       display: grid;
-      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.5rem;
     }
 
     .card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 1.25rem;
-      box-shadow: var(--shadow);
-      border: 1px solid #e0e7ec;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 18px;
+      padding: 1.25rem 1.2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(209, 213, 219, 0.85);
       font-size: 0.9rem;
     }
 
     .card h3 {
       font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary-dark);
+      margin-bottom: 0.45rem;
+      color: #064e3b;
     }
 
     .card p {
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       color: var(--muted);
       margin-bottom: 0.6rem;
     }
 
     .card ul {
-      margin-left: 1rem;
-      margin-top: 0.4rem;
+      margin-left: 1.1rem;
+      margin-top: 0.35rem;
       font-size: 0.85rem;
       color: var(--text);
     }
 
     .pill-label {
       display: inline-block;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--muted);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
     .quality-list {
@@ -332,7 +484,7 @@
 
     .forms-grid {
       display: grid;
-      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
       gap: 1.5rem;
     }
 
@@ -349,25 +501,29 @@
       color: #374151;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
-      padding: 0.55rem 0.6rem;
-      border-radius: 8px;
+      padding: 0.55rem 0.65rem;
+      border-radius: 9px;
       border: 1px solid #d1d5db;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       outline: none;
-      transition: border-color 0.12s ease, box-shadow 0.12s ease;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
       background: #f9fafb;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 1px rgba(45,139,87,0.12);
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.25);
       background: #ffffff;
     }
 
     textarea {
-      min-height: 80px;
+      min-height: 82px;
       resize: vertical;
     }
 
@@ -377,17 +533,73 @@
       margin-top: 0.15rem;
     }
 
+    .owners-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .owner-card {
+      background: radial-gradient(circle at top, #ecfdf5, #ffffff);
+      border-radius: 16px;
+      padding: 0.9rem 0.9rem 0.95rem;
+      border: 1px solid rgba(167, 243, 208, 0.7);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .owner-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(45, 212, 191, 0.16), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .owner-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .owner-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #052e16;
+    }
+
+    .owner-tag {
+      font-size: 0.72rem;
+      color: #0f766e;
+    }
+
+    .owner-role {
+      font-size: 0.72rem;
+      color: #6b7280;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
     footer {
-      margin-top: 2rem;
-      padding: 1.25rem;
-      background: #111827;
+      margin-top: 2.3rem;
+      padding: 1.3rem 1.4rem;
+      background: radial-gradient(circle at top, #022c22, #020617);
       color: #9ca3af;
       font-size: 0.8rem;
     }
 
     .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: 1120px;
+      margin: auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -398,47 +610,59 @@
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
+      gap: 0.5rem;
+      font-size: 0.84rem;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.8rem;
       font-size: 0.8rem;
     }
 
     .footer-links a {
-      color: #d1d5db;
+      color: #e5e7eb;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
-      padding: 0.25rem 0.6rem;
+      gap: 0.27rem;
+      padding: 0.22rem 0.6rem;
       border-radius: 999px;
       border: 1px solid #4b5563;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+      background: rgba(15, 23, 42, 0.6);
     }
 
     .badge-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.4);
     }
 
-    @media (max-width: 820px) {
+    .toggle-hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
       .hero {
-        grid-template-columns: minmax(0,1fr);
+        grid-template-columns: minmax(0, 1fr);
       }
       .hero-main {
         padding-right: 0;
       }
-      .hero {
-        margin-top: 1rem;
+      .hero-wrapper {
+        margin-top: 1.2rem;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .owners-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -452,37 +676,45 @@
         flex-wrap: wrap;
         row-gap: 0.4rem;
       }
-      .grid-2, .forms-grid {
-        grid-template-columns: minmax(0,1fr);
+      .grid-2,
+      .forms-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero {
+        padding: 1.3rem 1.1rem 1.6rem;
       }
     }
 
-    @media (max-width: 480px) {
-      .hero {
-        padding-top: 1rem;
-      }
+    @media (max-width: 540px) {
       .hero-buttons {
         flex-direction: column;
       }
+      .owners-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
       .card {
-        padding: 1rem;
+        padding: 1.05rem 1rem;
       }
     }
   </style>
 </head>
 <body>
 
+<!-- Falling moringa leaves layer -->
+<div class="leaf-layer" id="leafLayer"></div>
+
 <header>
   <div class="nav">
     <div class="logo">
       <div class="logo-icon">M</div>
       <div>
-        <div>MoringaConnect Hub</div>
-        <div style="font-size: 0.7rem; color: var(--muted);">Connecting Moringa Buyers & Suppliers</div>
+        <div class="logo-text-main">MoringaConnect Hub</div>
+        <div class="logo-text-sub">Bulk Moringa | Buyers · Sellers · Coordination</div>
       </div>
     </div>
     <nav class="nav-links">
       <a href="#about">About</a>
+      <a href="#owners">Team</a>
       <a href="#buyers">For Buyers</a>
       <a href="#suppliers">For Suppliers</a>
       <a href="#quality">Quality</a>
@@ -492,60 +724,72 @@
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-main">
-      <div class="pill">
-        <span class="pill-dot"></span>
-        Bulk moringa sourcing made simple
+  <div class="hero-wrapper">
+    <section class="hero">
+      <div class="hero-main">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          B2B Moringa Trading · India to Global
+          <span class="pill-tag">Beta network live</span>
+        </div>
+        <h1>
+          <span class="hero-highlight">Bulk Moringa Powder</span>
+          with verified suppliers & transparent deals.
+        </h1>
+        <p class="hero-subtitle">
+          MoringaConnect Hub links moringa farmers, processors and bulk buyers so you get the right quality at the right price — with a lean, trusted coordination layer in between.
+        </p>
+        <div class="hero-buttons">
+          <button id="btn-buyer" class="btn btn-primary btn-tab-active" type="button">
+            I’m a Buyer <span>→</span>
+          </button>
+          <button id="btn-supplier" class="btn btn-outline" type="button">
+            I’m a Supplier <span>→</span>
+          </button>
+        </div>
+        <div class="hero-meta">
+          <div><strong>Order range:</strong> 10 kg to multi-ton contracts</div>
+          <div><strong>Products:</strong> Leaf powder, seeds & derivatives</div>
+        </div>
       </div>
-      <h1>Bulk Moringa Powder. Verified Suppliers. Trusted Delivery.</h1>
-      <p class="hero-subtitle">
-        MoringaConnect Hub links moringa farmers, processors and bulk buyers so you get the right quality at the right price — with clear, honest coordination in between.
-      </p>
-      <div class="hero-buttons">
-        <a href="#buyer-form" class="btn btn-primary">
-          I’m a Buyer <span>→</span>
-        </a>
-        <a href="#supplier-form" class="btn btn-outline">
-          I’m a Supplier <span>→</span>
-        </a>
-      </div>
-      <div class="hero-meta">
-        <div><strong>B2B only</strong> · Bulk orders from 10 kg to multiple tons</div>
-        <div><strong>Focus:</strong> Leaf powder · Seeds · Derivatives</div>
-      </div>
-    </div>
 
-    <aside class="hero-card" aria-label="At-a-glance info">
-      <div class="hero-card-title">Why MoringaConnect Hub?</div>
-      <div class="hero-card-sub">A focused link between bulk buyers and reliable moringa suppliers.</div>
-      <div class="stat-row">
-        <div class="stat-label">Business model</div>
-        <div class="stat-value">Asset-light trading & marketplace</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label">You earn from</div>
-        <div class="stat-value">Margins & commissions</div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label">Ideal for</div>
-        <div class="stat-value">Farmers · Traders · Export buyers</div>
-      </div>
-      <div class="tag-row">
-        <span class="tag">Bulk supply</span>
-        <span class="tag">Quality-first</span>
-        <span class="tag">Simple coordination</span>
-        <span class="tag">Future private labels</span>
-      </div>
-    </aside>
-  </section>
+      <aside class="hero-card" aria-label="At-a-glance info">
+        <div class="hero-card-inner">
+          <div class="hero-card-title">
+            MoringaConnect Hub
+            <span class="hero-chip">Owners-led platform</span>
+          </div>
+          <div class="hero-card-sub">Created and operated by a small founder group focused on moringa-only B2B deals.</div>
+          <div class="stat-row">
+            <div class="stat-label">Business model</div>
+            <div class="stat-value">Asset-light trading marketplace</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label">You earn from</div>
+            <div class="stat-value">Margins · Commissions</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label">Ideal partners</div>
+            <div class="stat-value">Farmers · MSMEs · Export buyers</div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Focus: Moringa only</span>
+            <span class="tag">Quality-first</span>
+            <span class="tag">Simple coordination</span>
+            <span class="tag">Transparent quotes</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </div>
 
   <section id="about" class="section">
     <div class="section-header">
       <div>
         <div class="section-title">About MoringaConnect Hub</div>
-        <div class="section-subtitle">A single point of contact between moringa growers, processors and buyers.</div>
+        <div class="section-subtitle">A lightweight hub between moringa growers, processors, and serious buyers.</div>
       </div>
+      <div class="section-badge">Platform owners actively involved in every deal</div>
     </div>
     <div class="grid-2">
       <div class="card">
@@ -558,7 +802,7 @@
         <ul>
           <li>Bulk buyers: wholesalers, export houses, health brands, manufacturers.</li>
           <li>Suppliers: farmers, village units, powder processors, manufacturers.</li>
-          <li>Your role: a trusted coordinator connecting the two.</li>
+          <li>Your role with us: a long-term trading partner, not just a one-time order.</li>
         </ul>
       </div>
       <div class="card">
@@ -566,14 +810,67 @@
         <h3>Simple, Transparent Coordination</h3>
         <p>
           Buyers share their requirement, suppliers share their capacity and pricing, and MoringaConnect Hub coordinates
-          quotes, quality, and logistics so everyone knows exactly what to expect.
+          quotes, quality checks, and logistics so everyone knows exactly what to expect.
         </p>
         <ul>
-          <li>Collect enquiries from buyers via forms and WhatsApp.</li>
-          <li>Match them with pre-onboarded suppliers.</li>
-          <li>Help finalise price, terms and shipping.</li>
-          <li>Charge your margin or commission per deal.</li>
+          <li>Collect enquiries from buyers via forms, WhatsApp and email.</li>
+          <li>Match them with pre-onboarded, verified suppliers.</li>
+          <li>Help finalise price, quality terms and shipping plan.</li>
+          <li>Earn through margins or a clear per-order commission.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="owners" class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Owners of the Platform</div>
+        <div class="section-subtitle">MoringaConnect Hub is personally managed by a small, committed founding group.</div>
+      </div>
+    </div>
+    <div class="owners-grid">
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Kishore Kumar MADRI</div>
+          <div class="owner-tag">Co-owner · Coordination & Strategy</div>
+          <div class="owner-role">Buyer communication, supplier mapping, process & tracking.</div>
+        </div>
+      </div>
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Upendra Kumar</div>
+          <div class="owner-tag">Co-owner · Sourcing & Supplier Network</div>
+          <div class="owner-role">Field coordination, new supplier onboarding, ground checks.</div>
+        </div>
+      </div>
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Hanumanthu</div>
+          <div class="owner-tag">Co-owner · Farm & Quality Support</div>
+          <div class="owner-role">Support on farm-level practices and basic quality checks.</div>
+        </div>
+      </div>
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Paramesh</div>
+          <div class="owner-tag">Co-owner · Operations</div>
+          <div class="owner-role">Helps in coordinating movement, packing and timelines.</div>
+        </div>
+      </div>
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Chinna</div>
+          <div class="owner-tag">Co-owner · Local Network</div>
+          <div class="owner-role">Supports with local contacts, follow-ups and logistics.</div>
+        </div>
+      </div>
+      <div class="owner-card">
+        <div class="owner-main">
+          <div class="owner-name">Dadu</div>
+          <div class="owner-tag">Co-owner · Relationship Support</div>
+          <div class="owner-role">Relationship building, general support and coordination.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -640,18 +937,18 @@
     <div class="section-header">
       <div>
         <div class="section-title">Quality & Standards</div>
-        <div class="section-subtitle">Quality is non‑negotiable. It protects both buyers and suppliers.</div>
+        <div class="section-subtitle">Quality is non-negotiable. It protects both buyers and suppliers.</div>
       </div>
     </div>
     <div class="grid-2">
       <div class="card">
         <h3>What We Look For</h3>
         <ul class="quality-list">
-          <li>Shade‑dried leaves wherever possible.</li>
+          <li>Shade-dried leaves wherever possible.</li>
           <li>Fine, green powder – not dull or brown.</li>
           <li>Moisture levels generally at or below 7–8%.</li>
           <li>Clean processing environment with minimal contamination risk.</li>
-          <li>Food‑grade sacks or bags for transport and storage.</li>
+          <li>Food-grade sacks or bags for transport and storage.</li>
         </ul>
       </div>
       <div class="card">
@@ -660,7 +957,7 @@
           <li>Basic supplier details and declarations.</li>
           <li>Lab test reports where available, especially for larger orders.</li>
           <li>Photos or short videos of processing and packing if needed.</li>
-          <li>Optional: pre‑shipment sample approval for bulk buyers.</li>
+          <li>Optional: pre-shipment sample approval for bulk buyers.</li>
         </ul>
       </div>
     </div>
@@ -674,11 +971,11 @@
       </div>
     </div>
     <div class="forms-grid">
-      <div class="card" id="buyer-form">
+      <div class="card" id="buyer-form-card">
         <span class="pill-label">Form</span>
         <h3>Buyer Enquiry</h3>
-        <p>Tell us what you need. We’ll respond with suitable options and indicative pricing.</p>
-        <form>
+        <p>Tell us what you need. On submit, your email app opens and WhatsApp Web is prepared with your full details.</p>
+        <form id="buyerForm">
           <div>
             <label for="buyer-name">Name</label>
             <input id="buyer-name" type="text" placeholder="Your full name" />
@@ -688,7 +985,7 @@
             <input id="buyer-company" type="text" placeholder="Company or brand name" />
           </div>
           <div>
-            <label for="buyer-email">Email</label>
+            <label for="buyer-email">Your Email</label>
             <input id="buyer-email" type="email" placeholder="you@example.com" />
           </div>
           <div>
@@ -725,17 +1022,17 @@
           <div>
             <label for="buyer-message">Requirements / Message</label>
             <textarea id="buyer-message" placeholder="Share any details on quality, packaging or target price."></textarea>
-            <div class="helper-text">This form is a static example. Connect it to your email or CRM to receive enquiries.</div>
+            <div class="helper-text">On submit, email and WhatsApp Web will both open with all information pre-filled.</div>
           </div>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
 
-      <div class="card" id="supplier-form">
+      <div class="card toggle-hidden" id="supplier-form-card">
         <span class="pill-label">Form</span>
         <h3>Supplier Registration</h3>
-        <p>Share your basic information so we can understand your capacity and start sending you relevant enquiries.</p>
-        <form>
+        <p>On submit, your email app opens and WhatsApp Web chat is prepared with your full registration details.</p>
+        <form id="supplierForm">
           <div>
             <label for="sup-name">Name</label>
             <input id="sup-name" type="text" placeholder="Your full name" />
@@ -780,10 +1077,43 @@
           <div>
             <label for="sup-message">Additional Details</label>
             <textarea id="sup-message" placeholder="Share details about processing, drying method, packaging, etc."></textarea>
-            <div class="helper-text">Hook this form to your email or database to capture supplier registrations.</div>
+            <div class="helper-text">On submit, email & WhatsApp Web will open with these details.</div>
           </div>
-          <button type="button" class="btn btn-outline">Submit</button>
+          <button type="submit" class="btn btn-outline">Submit</button>
         </form>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem; max-width: 520px;">
+      <h3>Quick Contact</h3>
+      <p style="font-size: 0.85rem; color: #6b7280;">
+        Reach us instantly using WhatsApp Web, email, SMS or a direct call.
+      </p>
+      <div class="quick-actions">
+        <a id="whatsappDirectLink"
+           href="#"
+           class="btn btn-primary btn-small"
+           target="_blank">
+          WhatsApp Web
+        </a>
+        <a id="emailQuickLink"
+           href="mailto:"
+           class="btn btn-outline btn-small">
+          Email Us
+        </a>
+        <a id="smsQuickLink"
+           href="#"
+           class="btn btn-outline btn-small">
+          Send SMS
+        </a>
+        <a id="callQuickLink"
+           href="#"
+           class="btn btn-outline btn-small">
+          Call
+        </a>
+      </div>
+      <div class="helper-text">
+        On mobile, WhatsApp and SMS will open in the corresponding apps.
       </div>
     </div>
   </section>
@@ -794,17 +1124,230 @@
     <div class="footer-brand">
       <span class="badge">
         <span class="badge-dot"></span>
-        B2B · Moringa‑focused
+        Owners-led · Moringa-focused
       </span>
       <span>© 2025 MoringaConnect Hub. All rights reserved.</span>
     </div>
     <div class="footer-links">
-      <span>Contact: <a href="mailto:info@moringaconnecthub.com">Kishore99669@gmail.com</a></span>
+      <span>Contact: <a id="emailDisplay" href="mailto:">kishore99669@gmail.com</a></span>
       <span>|</span>
-      <span>WhatsApp (example): +91-9182321221</span>
+      <span id="whatsappDisplay">WhatsApp: +91-9182321221</span>
     </div>
   </div>
 </footer>
+
+<script>
+  // === CONFIG: EMAIL & WHATSAPP (already filled with your details) ===
+  const OWNER_EMAIL = "kishore99669@gmail.com";
+  const WHATSAPP_NUMBER = "919182321221"; // full number without + or spaces
+
+  function scrollToContact() {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  function setTabActive(mode) {
+    const btnBuyer = document.getElementById("btn-buyer");
+    const btnSupplier = document.getElementById("btn-supplier");
+    if (!btnBuyer || !btnSupplier) return;
+    if (mode === "buyer") {
+      btnBuyer.classList.add("btn-tab-active", "btn-primary");
+      btnBuyer.classList.remove("btn-outline");
+      btnSupplier.classList.remove("btn-tab-active", "btn-primary");
+      btnSupplier.classList.add("btn-outline");
+    } else {
+      btnSupplier.classList.add("btn-tab-active", "btn-primary");
+      btnSupplier.classList.remove("btn-outline");
+      btnBuyer.classList.remove("btn-tab-active", "btn-primary");
+      btnBuyer.classList.add("btn-outline");
+    }
+  }
+
+  function showBuyerForm() {
+    const buyerCard = document.getElementById("buyer-form-card");
+    const supplierCard = document.getElementById("supplier-form-card");
+    if (buyerCard && supplierCard) {
+      buyerCard.classList.remove("toggle-hidden");
+      supplierCard.classList.add("toggle-hidden");
+    }
+    setTabActive("buyer");
+    scrollToContact();
+  }
+
+  function showSupplierForm() {
+    const buyerCard = document.getElementById("buyer-form-card");
+    const supplierCard = document.getElementById("supplier-form-card");
+    if (buyerCard && supplierCard) {
+      supplierCard.classList.remove("toggle-hidden");
+      buyerCard.classList.add("toggle-hidden");
+    }
+    setTabActive("supplier");
+    scrollToContact();
+  }
+
+  function buildMailto(subject, body) {
+    return "mailto:" + encodeURIComponent(OWNER_EMAIL) +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  }
+
+  function openWhatsAppWeb(text) {
+    const url = "https://web.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent(text);
+    window.open(url, "_blank");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create falling leaves
+    const leafLayer = document.getElementById("leafLayer");
+    if (leafLayer) {
+      const leafEmojis = ["🌿", "🍃", "🍀"];
+      const leafCount = 22;
+      for (let i = 0; i < leafCount; i++) {
+        const span = document.createElement("span");
+        span.className = "leaf";
+        span.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+        const startLeft = Math.random() * 100;
+        const duration = 10 + Math.random() * 10; // 10s–20s
+        const delay = Math.random() * 10;         // 0–10s
+        const size = 1.1 + Math.random() * 0.9;   // scale 1.1–2.0
+
+        span.style.left = startLeft + "vw";
+        span.style.animationDuration = duration + "s, " + (8 + Math.random() * 6) + "s";
+        span.style.animationDelay = delay + "s, " + delay + "s";
+        span.style.transform = "scale(" + size + ")";
+        leafLayer.appendChild(span);
+      }
+    }
+
+    // Hook tab buttons
+    const btnBuyer = document.getElementById("btn-buyer");
+    const btnSupplier = document.getElementById("btn-supplier");
+    if (btnBuyer) btnBuyer.addEventListener("click", showBuyerForm);
+    if (btnSupplier) btnSupplier.addEventListener("click", showSupplierForm);
+
+    // Footer and quick links
+    const emailLink = document.getElementById("emailDisplay");
+    if (emailLink) {
+      emailLink.href = "mailto:" + OWNER_EMAIL;
+      emailLink.textContent = OWNER_EMAIL;
+    }
+    const waDisplay = document.getElementById("whatsappDisplay");
+    if (waDisplay) {
+      waDisplay.textContent = "WhatsApp: +91-9182321221";
+    }
+
+    const waDirect = document.getElementById("whatsappDirectLink");
+    if (waDirect) {
+      waDirect.href = "https://web.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent("Hi, I am interested in MoringaConnect Hub for moringa business.");
+    }
+    const emailQuick = document.getElementById("emailQuickLink");
+    if (emailQuick) {
+      emailQuick.href = "mailto:" + OWNER_EMAIL + "?subject=" + encodeURIComponent("General enquiry - MoringaConnect Hub");
+    }
+    const smsQuick = document.getElementById("smsQuickLink");
+    if (smsQuick) {
+      smsQuick.href = "sms:+9182321221?body=" + encodeURIComponent("Hi, I would like to know more about MoringaConnect Hub.");
+    }
+    const callQuick = document.getElementById("callQuickLink");
+    if (callQuick) {
+      callQuick.href = "tel:+9182321221";
+    }
+
+    const buyerForm = document.getElementById("buyerForm");
+    const supplierForm = document.getElementById("supplierForm");
+
+    if (buyerForm) {
+      buyerForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("buyer-name").value || "";
+        const company = document.getElementById("buyer-company").value || "";
+        const email = document.getElementById("buyer-email").value || "";
+        const phone = document.getElementById("buyer-phone").value || "";
+        const location = document.getElementById("buyer-location").value || "";
+        const product = document.getElementById("buyer-product").value || "";
+        const qty = document.getElementById("buyer-qty").value || "";
+        const freq = document.getElementById("buyer-frequency").value || "";
+        const msg = document.getElementById("buyer-message").value || "";
+
+        const mailBody =
+          "New Buyer Enquiry from MoringaConnect Hub:\n\n" +
+          "Name: " + name + "\n" +
+          "Company: " + company + "\n" +
+          "Email: " + email + "\n" +
+          "Phone / WhatsApp: " + phone + "\n" +
+          "Location: " + location + "\n" +
+          "Product Type: " + product + "\n" +
+          "Quantity: " + qty + "\n" +
+          "Frequency: " + freq + "\n" +
+          "Message: " + msg;
+
+        const mailtoUrl = buildMailto("Buyer Enquiry - MoringaConnect Hub", mailBody);
+        window.location.href = mailtoUrl;
+
+        const waText =
+          "New Buyer Enquiry (MoringaConnect Hub):\n" +
+          "Name: " + name + "\n" +
+          (company ? "Company: " + company + "\n" : "") +
+          "Email: " + email + "\n" +
+          "Phone / WhatsApp: " + phone + "\n" +
+          "Location: " + location + "\n" +
+          "Product Type: " + product + "\n" +
+          "Quantity: " + qty + "\n" +
+          "Frequency: " + freq + "\n" +
+          "Message: " + msg;
+        openWhatsAppWeb(waText);
+      });
+    }
+
+    if (supplierForm) {
+      supplierForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("sup-name").value || "";
+        const company = document.getElementById("sup-company").value || "";
+        const email = document.getElementById("sup-email").value || "";
+        const phone = document.getElementById("sup-phone").value || "";
+        const location = document.getElementById("sup-location").value || "";
+        const type = document.getElementById("sup-type").value || "";
+        const capacity = document.getElementById("sup-capacity").value || "";
+        const lab = document.getElementById("sup-lab").value || "";
+        const msg = document.getElementById("sup-message").value || "";
+
+        const mailBody =
+          "New Supplier Registration from MoringaConnect Hub:\n\n" +
+          "Name: " + name + "\n" +
+          "Farm / Company: " + company + "\n" +
+          "Email: " + email + "\n" +
+          "Phone / WhatsApp: " + phone + "\n" +
+          "Location: " + location + "\n" +
+          "Type: " + type + "\n" +
+          "Monthly Capacity: " + capacity + "\n" +
+          "Lab Reports: " + lab + "\n" +
+          "Details: " + msg;
+
+        const mailtoUrl = buildMailto("Supplier Registration - MoringaConnect Hub", mailBody);
+        window.location.href = mailtoUrl;
+
+        const waText =
+          "New Supplier Registration (MoringaConnect Hub):\n" +
+          "Name: " + name + "\n" +
+          "Farm / Company: " + company + "\n" +
+          "Email: " + email + "\n" +
+          "Phone / WhatsApp: " + phone + "\n" +
+          "Location: " + location + "\n" +
+          "Type: " + type + "\n" +
+          "Monthly Capacity: " + capacity + "\n" +
+          "Lab Reports: " + lab + "\n" +
+          "Details: " + msg;
+        openWhatsAppWeb(waText);
+      });
+    }
+
+    // Default view: buyer form visible
+    showBuyerForm();
+  });
+</script>
 
 </body>
 </html>
