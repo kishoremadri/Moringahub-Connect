@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,10 +481,20 @@
       margin-right: 0.45rem;
     }
 
+    /* CENTERED forms layout */
+
     .forms-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 1.5rem;
+      align-items: center;
+    }
+
+    #buyer-form-card,
+    #supplier-form-card {
+      max-width: 620px;
+      width: 100%;
     }
 
     form {
@@ -676,12 +685,8 @@
         flex-wrap: wrap;
         row-gap: 0.4rem;
       }
-      .grid-2,
-      .forms-grid {
+      .grid-2 {
         grid-template-columns: minmax(0, 1fr);
-      }
-      .hero {
-        padding: 1.3rem 1.1rem 1.6rem;
       }
     }
 
@@ -695,6 +700,19 @@
       .card {
         padding: 1.05rem 1rem;
       }
+    }
+
+    /* Centering Quick Contact card at bottom */
+    #quick-contact-card {
+      margin-top: 1.5rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Smooth scroll alignment for contact section */
+    #contact {
+      scroll-margin-top: 90px;
     }
   </style>
 </head>
@@ -822,7 +840,7 @@
     </div>
   </section>
 
- 
+
   <section id="buyers" class="section">
     <div class="section-header">
       <div>
@@ -918,15 +936,17 @@
         <div class="section-subtitle">Share your details and we’ll get back to you with the next steps.</div>
       </div>
     </div>
+
+    <!-- Centered forms -->
     <div class="forms-grid">
       <div class="card" id="buyer-form-card">
         <span class="pill-label">Form</span>
         <h3>Buyer Enquiry</h3>
-        <p>Tell us what you need. On submit, your email app opens and WhatsApp Web is prepared with your full details.</p>
+        <p>Tell us what you need. On submit, your details will be sent to the platform owners.</p>
         <form id="buyerForm">
           <div>
             <label for="buyer-name">Name</label>
-            <input id="buyer-name" type="text" placeholder="Your full name" />
+            <input id="buyer-name" type="text" placeholder="Your full name" required />
           </div>
           <div>
             <label for="buyer-company">Company (optional)</label>
@@ -934,15 +954,15 @@
           </div>
           <div>
             <label for="buyer-email">Your Email</label>
-            <input id="buyer-email" type="email" placeholder="you@example.com" />
+            <input id="buyer-email" type="email" placeholder="you@example.com" required />
           </div>
           <div>
             <label for="buyer-phone">Phone / WhatsApp</label>
-            <input id="buyer-phone" type="tel" placeholder="+91 / international number" />
+            <input id="buyer-phone" type="tel" placeholder="+91 / international number" required />
           </div>
           <div>
             <label for="buyer-location">Country / City</label>
-            <input id="buyer-location" type="text" placeholder="e.g., India – Hyderabad" />
+            <input id="buyer-location" type="text" placeholder="e.g., India – Hyderabad" required />
           </div>
           <div>
             <label for="buyer-product">Product Type</label>
@@ -956,7 +976,7 @@
           </div>
           <div>
             <label for="buyer-qty">Quantity Needed</label>
-            <input id="buyer-qty" type="text" placeholder="e.g., 100 kg / 2 tons" />
+            <input id="buyer-qty" type="text" placeholder="e.g., 100 kg / 2 tons" required />
           </div>
           <div>
             <label for="buyer-frequency">Frequency</label>
@@ -970,36 +990,37 @@
           <div>
             <label for="buyer-message">Requirements / Message</label>
             <textarea id="buyer-message" placeholder="Share any details on quality, packaging or target price."></textarea>
-            <div class="helper-text">On submit, email and WhatsApp Web will both open with all information pre-filled.</div>
+            <div class="helper-text">After submit, you’ll see a confirmation message on this page.</div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <div id="buyer-status" class="helper-text"></div>
         </form>
       </div>
 
       <div class="card toggle-hidden" id="supplier-form-card">
         <span class="pill-label">Form</span>
         <h3>Supplier Registration</h3>
-        <p>On submit, your email app opens and WhatsApp Web chat is prepared with your full registration details.</p>
+        <p>On submit, your registration details will be sent to the platform owners.</p>
         <form id="supplierForm">
           <div>
             <label for="sup-name">Name</label>
-            <input id="sup-name" type="text" placeholder="Your full name" />
+            <input id="sup-name" type="text" placeholder="Your full name" required />
           </div>
           <div>
             <label for="sup-company">Farm / Company Name</label>
-            <input id="sup-company" type="text" placeholder="Farm, unit or company" />
+            <input id="sup-company" type="text" placeholder="Farm, unit or company" required />
           </div>
           <div>
             <label for="sup-location">Location</label>
-            <input id="sup-location" type="text" placeholder="Village / City / State" />
+            <input id="sup-location" type="text" placeholder="Village / City / State" required />
           </div>
           <div>
             <label for="sup-email">Email</label>
-            <input id="sup-email" type="email" placeholder="you@example.com" />
+            <input id="sup-email" type="email" placeholder="you@example.com" required />
           </div>
           <div>
             <label for="sup-phone">Phone / WhatsApp</label>
-            <input id="sup-phone" type="tel" placeholder="+91 number" />
+            <input id="sup-phone" type="tel" placeholder="+91 number" required />
           </div>
           <div>
             <label for="sup-type">You are a</label>
@@ -1012,7 +1033,7 @@
           </div>
           <div>
             <label for="sup-capacity">Monthly Capacity</label>
-            <input id="sup-capacity" type="text" placeholder="e.g., 500 kg / 1 ton / 5 tons" />
+            <input id="sup-capacity" type="text" placeholder="e.g., 500 kg / 1 ton / 5 tons" required />
           </div>
           <div>
             <label for="sup-lab">Lab Reports Available?</label>
@@ -1025,14 +1046,16 @@
           <div>
             <label for="sup-message">Additional Details</label>
             <textarea id="sup-message" placeholder="Share details about processing, drying method, packaging, etc."></textarea>
-            <div class="helper-text">On submit, email & WhatsApp Web will open with these details.</div>
+            <div class="helper-text">After submit, you’ll see a confirmation message on this page.</div>
           </div>
           <button type="submit" class="btn btn-outline">Submit</button>
+          <div id="supplier-status" class="helper-text"></div>
         </form>
       </div>
     </div>
 
-    <div class="card" style="margin-top: 1.5rem; max-width: 520px;">
+    <!-- Centered Quick Contact -->
+    <div class="card" id="quick-contact-card">
       <h3>Quick Contact</h3>
       <p style="font-size: 0.85rem; color: #6b7280;">
         Reach us instantly using WhatsApp Web, email, SMS or a direct call.
@@ -1047,26 +1070,23 @@
         <a id="emailQuickLink"
            href="mailto:"
            class="btn btn-outline btn-small">
-          Email Us
-        </a>
-        <!--a id="smsQuickLink"
+          Email Us</a>
+        <a id="smsQuickLink"
            href="#"
            class="btn btn-outline btn-small">
-          Send SMS
-      </a-->
-        <!--a id="callQuickLink"
+          Send SMS</a>
+        <a id="callQuickLink"
            href="#"
            class="btn btn-outline btn-small">
-          Call
-      </a-->
+          Call</a>
       </div>
       <div class="helper-text">
         On mobile, WhatsApp and SMS will open in the corresponding apps.
       </div>
     </div>
   </section>
-</main>
- <section id="owners" class="section">
+  
+  <section id="owners" class="section">
     <div class="section-header">
       <div>
         <div class="section-title">Owners of the Platform</div>
@@ -1118,6 +1138,7 @@
       </div>
     </div>
   </section>
+</main>
 
 <footer>
   <div class="footer-inner">
@@ -1137,14 +1158,19 @@
 </footer>
 
 <script>
-  // === CONFIG: EMAIL & WHATSAPP (already filled with your details) ===
+  // === CONFIG: EMAIL & WHATSAPP (your details) ===
   const OWNER_EMAIL = "kishore99669@gmail.com";
-  const WHATSAPP_NUMBER = "919182321221"; // full number without + or spaces
+  const WHATSAPP_NUMBER = "+91-9182321221"; // full number without + or spaces
 
-  function scrollToContact() {
+  // === Your Google Apps Script Web App URL (must end with /exec) ===
+  // IMPORTANT: replace PASTE_YOUR_WEB_APP_URL_HERE with your actual URL
+  //const FORM_ENDPOINT = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_URL_HERE/exec";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxYbn84oUHmjyiLuT15UoOStcbRWtc75QZFhaghRS1F2Uwzm2lhau8wwfuD0oIMVt-0/exec";
+
+  function scrollToContactCenter() {
     const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+    if (contactSection && contactSection.scrollIntoView) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }
 
@@ -1173,7 +1199,7 @@
       supplierCard.classList.add("toggle-hidden");
     }
     setTabActive("buyer");
-    scrollToContact();
+    scrollToContactCenter();
   }
 
   function showSupplierForm() {
@@ -1184,18 +1210,7 @@
       buyerCard.classList.add("toggle-hidden");
     }
     setTabActive("supplier");
-    scrollToContact();
-  }
-
-  function buildMailto(subject, body) {
-    return "mailto:" + encodeURIComponent(OWNER_EMAIL) +
-      "?subject=" + encodeURIComponent(subject) +
-      "&body=" + encodeURIComponent(body);
-  }
-
-  function openWhatsAppWeb(text) {
-    const url = "https://web.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent(text);
-    window.open(url, "_blank");
+    scrollToContactCenter();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -1240,111 +1255,114 @@
 
     const waDirect = document.getElementById("whatsappDirectLink");
     if (waDirect) {
-      waDirect.href = "https://web.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent("Hi, I am interested in MoringaConnect Hub for moringa business.");
+      waDirect.href = "https://web.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" +
+        encodeURIComponent("Hi, I am interested in MoringaConnect Hub for moringa business.");
     }
     const emailQuick = document.getElementById("emailQuickLink");
     if (emailQuick) {
-      emailQuick.href = "mailto:" + OWNER_EMAIL + "?subject=" + encodeURIComponent("General enquiry - MoringaConnect Hub");
+      emailQuick.href = "mailto:" + OWNER_EMAIL +
+        "?subject=" + encodeURIComponent("General enquiry - MoringaConnect Hub");
     }
     const smsQuick = document.getElementById("smsQuickLink");
     if (smsQuick) {
-      smsQuick.href = "sms:+9182321221?body=" + encodeURIComponent("Hi, I would like to know more about MoringaConnect Hub.");
+      smsQuick.href = "sms:+91-9182321221?body=" +
+        encodeURIComponent("Hi, I would like to know more about MoringaConnect Hub.");
     }
     const callQuick = document.getElementById("callQuickLink");
     if (callQuick) {
-      callQuick.href = "tel:+9182321221";
+      callQuick.href = "tel:+91-9182321221";
     }
 
     const buyerForm = document.getElementById("buyerForm");
     const supplierForm = document.getElementById("supplierForm");
+    const buyerStatus = document.getElementById("buyer-status");
+    const supplierStatus = document.getElementById("supplier-status");
+
+    // Helper: send form data to backend endpoint (no-cors fire-and-forget)
+    async function sendForm(payload, statusEl, submitButton) {
+      if (!FORM_ENDPOINT || FORM_ENDPOINT.includes("PASTE_YOUR_WEB_APP_URL_HERE")) {
+        if (statusEl) {
+          statusEl.style.color = "#b91c1c";
+          statusEl.textContent = "Form endpoint not configured. Please update FORM_ENDPOINT.";
+        }
+        return;
+      }
+
+      try {
+        if (submitButton) {
+          submitButton.disabled = true;
+        }
+        if (statusEl) {
+          statusEl.style.color = "#6b7280";
+          statusEl.textContent = "Submitting...";
+        }
+
+        console.log("Sending payload to:", FORM_ENDPOINT, payload);
+
+        await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(payload)
+        });
+
+        if (statusEl) {
+          statusEl.style.color = "#16a34a";
+          statusEl.textContent = "Thank you! Your details have been sent successfully.";
+        }
+      } catch (e) {
+        console.error("Form submit error:", e);
+        if (statusEl) {
+          statusEl.style.color = "#b91c1c";
+          statusEl.textContent = "There was a problem sending your details. Please try WhatsApp or email.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+        }
+      }
+    }
 
     if (buyerForm) {
       buyerForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        const name = document.getElementById("buyer-name").value || "";
-        const company = document.getElementById("buyer-company").value || "";
-        const email = document.getElementById("buyer-email").value || "";
-        const phone = document.getElementById("buyer-phone").value || "";
-        const location = document.getElementById("buyer-location").value || "";
-        const product = document.getElementById("buyer-product").value || "";
-        const qty = document.getElementById("buyer-qty").value || "";
-        const freq = document.getElementById("buyer-frequency").value || "";
-        const msg = document.getElementById("buyer-message").value || "";
-
-        const mailBody =
-          "New Buyer Enquiry from MoringaConnect Hub:\n\n" +
-          "Name: " + name + "\n" +
-          "Company: " + company + "\n" +
-          "Email: " + email + "\n" +
-          "Phone / WhatsApp: " + phone + "\n" +
-          "Location: " + location + "\n" +
-          "Product Type: " + product + "\n" +
-          "Quantity: " + qty + "\n" +
-          "Frequency: " + freq + "\n" +
-          "Message: " + msg;
-
-        const mailtoUrl = buildMailto("Buyer Enquiry - MoringaConnect Hub", mailBody);
-        window.location.href = mailtoUrl;
-
-        const waText =
-          "New Buyer Enquiry (MoringaConnect Hub):\n" +
-          "Name: " + name + "\n" +
-          (company ? "Company: " + company + "\n" : "") +
-          "Email: " + email + "\n" +
-          "Phone / WhatsApp: " + phone + "\n" +
-          "Location: " + location + "\n" +
-          "Product Type: " + product + "\n" +
-          "Quantity: " + qty + "\n" +
-          "Frequency: " + freq + "\n" +
-          "Message: " + msg;
-        openWhatsAppWeb(waText);
+        const submitBtn = buyerForm.querySelector("button[type='submit']");
+        const payload = {
+          type: "buyer",
+          name: document.getElementById("buyer-name").value || "",
+          company: document.getElementById("buyer-company").value || "",
+          email: document.getElementById("buyer-email").value || "",
+          phone: document.getElementById("buyer-phone").value || "",
+          location: document.getElementById("buyer-location").value || "",
+          product: document.getElementById("buyer-product").value || "",
+          quantity: document.getElementById("buyer-qty").value || "",
+          frequency: document.getElementById("buyer-frequency").value || "",
+          message: document.getElementById("buyer-message").value || ""
+        };
+        sendForm(payload, buyerStatus, submitBtn);
       });
     }
 
     if (supplierForm) {
       supplierForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        const name = document.getElementById("sup-name").value || "";
-        const company = document.getElementById("sup-company").value || "";
-        const email = document.getElementById("sup-email").value || "";
-        const phone = document.getElementById("sup-phone").value || "";
-        const location = document.getElementById("sup-location").value || "";
-        const type = document.getElementById("sup-type").value || "";
-        const capacity = document.getElementById("sup-capacity").value || "";
-        const lab = document.getElementById("sup-lab").value || "";
-        const msg = document.getElementById("sup-message").value || "";
-
-        const mailBody =
-          "New Supplier Registration from MoringaConnect Hub:\n\n" +
-          "Name: " + name + "\n" +
-          "Farm / Company: " + company + "\n" +
-          "Email: " + email + "\n" +
-          "Phone / WhatsApp: " + phone + "\n" +
-          "Location: " + location + "\n" +
-          "Type: " + type + "\n" +
-          "Monthly Capacity: " + capacity + "\n" +
-          "Lab Reports: " + lab + "\n" +
-          "Details: " + msg;
-
-        const mailtoUrl = buildMailto("Supplier Registration - MoringaConnect Hub", mailBody);
-        window.location.href = mailtoUrl;
-
-        const waText =
-          "New Supplier Registration (MoringaConnect Hub):\n" +
-          "Name: " + name + "\n" +
-          "Farm / Company: " + company + "\n" +
-          "Email: " + email + "\n" +
-          "Phone / WhatsApp: " + phone + "\n" +
-          "Location: " + location + "\n" +
-          "Type: " + type + "\n" +
-          "Monthly Capacity: " + capacity + "\n" +
-          "Lab Reports: " + lab + "\n" +
-          "Details: " + msg;
-        openWhatsAppWeb(waText);
+        const submitBtn = supplierForm.querySelector("button[type='submit']");
+        const payload = {
+          type: "supplier",
+          name: document.getElementById("sup-name").value || "",
+          company: document.getElementById("sup-company").value || "",
+          email: document.getElementById("sup-email").value || "",
+          phone: document.getElementById("sup-phone").value || "",
+          location: document.getElementById("sup-location").value || "",
+          roleType: document.getElementById("sup-type").value || "",
+          capacity: document.getElementById("sup-capacity").value || "",
+          lab: document.getElementById("sup-lab").value || "",
+          message: document.getElementById("sup-message").value || ""
+        };
+        sendForm(payload, supplierStatus, submitBtn);
       });
     }
 
-    // Default view: buyer form visible
+    // Default view: buyer form visible and centered
     showBuyerForm();
   });
 </script>
